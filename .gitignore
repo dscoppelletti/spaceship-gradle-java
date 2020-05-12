@@ -1,0 +1,27 @@
+# Ignored files
+
+# Private files
+local.properties
+
+# Log files
+*.log
+
+# Java
+*.class
+
+# Gradle
+.gradle/
+build/
+
+# IntelliJ IDEA
+*.iml
+.externalNativeBuild
+.idea
+captures
+
+# Windows
+Thumbs.db
+
+# Mac
+.DS_Store
+
