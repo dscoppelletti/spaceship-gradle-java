@@ -16,10 +16,10 @@
 
 package it.scoppelletti.spaceship.gradle.java;
 
+import java.net.URI;
 import javax.annotation.Nonnull;
 import it.scoppelletti.spaceship.gradle.ProjectTools;
 import it.scoppelletti.spaceship.gradle.SpaceshipPlugin;
-import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.logging.Logger;
@@ -31,15 +31,15 @@ import org.gradle.api.logging.Logging;
  * @since 1.0.0
  */
 @SuppressWarnings("unused")
-public class SpaceshipJavaPlugin implements Plugin<Project> {
+public class LibraryPlugin implements Plugin<Project> {
     private static final Logger myLogger = Logging.getLogger(
-            SpaceshipJavaPlugin.class);
+            LibraryPlugin.class);
 
     @Override
     public void apply(@Nonnull Project project) {
-        String devRepoUrl;
+        URI devRepoUrl;
         ProjectTools projectTools;
-        JavaTools platformTools;
+        JavaLibraryTools libTools;
 
         if (project.getPlugins().hasPlugin(SpaceshipPlugin.class)) {
             myLogger.info("Plugin {} already applied.", SpaceshipPlugin.class);
@@ -50,21 +50,21 @@ public class SpaceshipJavaPlugin implements Plugin<Project> {
 
         projectTools = new ProjectTools(project);
         devRepoUrl = projectTools.applyMavenPublish();
-        platformTools = new JavaTools(project);
+        libTools = new JavaLibraryTools(project);
 
         project.afterEvaluate(prj -> {
-            platformTools.generateMetainf();
-            platformTools.packageSources();
+            libTools.generateMetainf();
+            libTools.packageSources();
 
             if (projectTools.isKDocEnabled()) {
-                platformTools.generateKDoc();
-                platformTools.packageKDoc();
+                libTools.generateKDoc();
+                libTools.packageKDoc();
             }
 
-            if (StringUtils.isNotBlank(devRepoUrl)) {
-                platformTools.publish();
+            if (devRepoUrl != null) {
+                libTools.publish();
                 projectTools.definePublishingRepo(devRepoUrl,
-                        JavaTaskNames.ASSEMBLE);
+                        JavaLibraryTaskNames.ASSEMBLE);
             }
         });
     }

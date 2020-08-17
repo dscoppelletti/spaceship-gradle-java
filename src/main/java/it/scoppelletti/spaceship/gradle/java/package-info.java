@@ -15,7 +15,7 @@
  */
 
 /**
- * Spaceship Gradle Plugin for Java libraries.
+ * Spaceship Gradle Plugin for Java projects.
  *
  * @version 1.0.0
  */

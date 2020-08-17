@@ -18,13 +18,13 @@ package it.scoppelletti.spaceship.gradle.java;
 
 import java.util.Objects;
 import javax.annotation.Nonnull;
-import it.scoppelletti.spaceship.gradle.TaskNames;
+import it.scoppelletti.spaceship.gradle.LibraryTaskNames;
 import org.gradle.api.Project;
 
 /**
  * Provides name and description of the tasks.
  */
-final class JavaTaskNames implements TaskNames {
+final class JavaLibraryTaskNames implements LibraryTaskNames {
 
     /**
      * Name of the assemble task.
@@ -38,7 +38,7 @@ final class JavaTaskNames implements TaskNames {
      *
      * @param project Project.
      */
-    JavaTaskNames(@Nonnull Project project) {
+    JavaLibraryTaskNames(@Nonnull Project project) {
         myProject = Objects.requireNonNull(project,
                 "Argument project is null.");
     }

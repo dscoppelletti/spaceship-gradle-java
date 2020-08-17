@@ -20,7 +20,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.Objects;
 import javax.annotation.Nonnull;
-import it.scoppelletti.spaceship.gradle.PlatformTools;
+import it.scoppelletti.spaceship.gradle.LibraryTools;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
 import org.gradle.api.component.SoftwareComponent;
@@ -33,9 +33,9 @@ import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.bundling.Jar;
 
 /**
- * Tools.
+ * Library tools.
  */
-final class JavaTools extends PlatformTools {
+final class JavaLibraryTools extends LibraryTools {
     private static final String COMPONENT_JAVA = "java";
     private static final String PACKAGING = "jar";
     private final Project myProject;
@@ -45,8 +45,9 @@ final class JavaTools extends PlatformTools {
      *
      * @param project Project.
      */
-    JavaTools(@Nonnull Project project) {
-        super(project, JavaTools.PACKAGING, new JavaTaskNames(project));
+    JavaLibraryTools(@Nonnull Project project) {
+        super(project, JavaLibraryTools.PACKAGING,
+                new JavaLibraryTaskNames(project));
 
         myProject = project;
     }
@@ -115,9 +116,10 @@ final class JavaTools extends PlatformTools {
         publ = doPublish();
 
         component = Objects.requireNonNull(
-                myProject.getComponents().findByName(JavaTools.COMPONENT_JAVA),
+                myProject.getComponents().findByName(
+                        JavaLibraryTools.COMPONENT_JAVA),
                 () -> String.format("Software component %1$s not found.",
-                        JavaTools.COMPONENT_JAVA));
+                        JavaLibraryTools.COMPONENT_JAVA));
         publ.from(component);
     }
 }

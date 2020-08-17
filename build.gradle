@@ -27,7 +27,7 @@ apply plugin: 'com.github.ben-manes.versions'
 
 group 'it.scoppelletti.spaceship'
 version '1.0.0'
-description 'Spaceship Gradle Plugin for Java libraries'
+description 'Spaceship Gradle Plugin for Java projects'
 archivesBaseName = 'spaceship-gradle-java'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -35,9 +35,14 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 gradlePlugin {
     plugins {
+        spaceshipJavaLibrary {
+            id = 'it.scoppelletti.spaceship.java-library'
+            implementationClass = 'it.scoppelletti.spaceship.gradle.java.LibraryPlugin'
+        }
+        // Deprecated
         spaceshipJava {
             id = 'it.scoppelletti.spaceship.spaceship-gradle-java'
-            implementationClass = 'it.scoppelletti.spaceship.gradle.java.SpaceshipJavaPlugin'
+            implementationClass = 'it.scoppelletti.spaceship.gradle.java.LibraryPlugin'
         }
     }
 }
