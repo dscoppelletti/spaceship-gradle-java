@@ -19,7 +19,7 @@ package it.scoppelletti.spaceship.gradle.java.tasks;
 import java.io.File;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Project;
-import org.gradle.api.plugins.JavaPluginConvention;
+import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.TaskAction;
 
@@ -45,10 +45,10 @@ public class PrintSourceSetsTask extends DefaultTask {
     @TaskAction
     public void run() {
         Project project = getProject();
-        JavaPluginConvention convention;
+        JavaPluginExtension convention;
 
-        convention = project.getConvention().getPlugin(
-                JavaPluginConvention.class);
+        convention = project.getExtensions().getByType(
+                JavaPluginExtension.class);
         for (SourceSet sources : convention.getSourceSets()) {
             System.out.printf("SourceSet(%1$s) {%n", sources.getName());
             for (File file : sources.getAllJava().getSourceDirectories()) {

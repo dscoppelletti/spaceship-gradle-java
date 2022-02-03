@@ -26,7 +26,7 @@ import org.gradle.api.Task;
 import org.gradle.api.component.SoftwareComponent;
 import org.gradle.api.file.FileCollection;
 import org.gradle.api.plugins.JavaPlugin;
-import org.gradle.api.plugins.JavaPluginConvention;
+import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.publish.maven.MavenPublication;
 import org.gradle.api.tasks.Copy;
 import org.gradle.api.tasks.SourceSet;
@@ -81,10 +81,10 @@ final class JavaLibraryTools extends LibraryTools {
         Jar jarTask;
         FileCollection source;
         SourceSet mainSources;
-        JavaPluginConvention convention;
+        JavaPluginExtension convention;
 
-        convention = myProject.getConvention().getPlugin(
-                JavaPluginConvention.class);
+        convention = myProject.getExtensions().getByType(
+                JavaPluginExtension.class);
 
         source = myProject.files();
         mainSources = convention.getSourceSets().getByName("main");
