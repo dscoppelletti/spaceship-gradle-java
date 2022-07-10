@@ -1,4 +1,5 @@
-Spaceship Gradle Plugin for Java projects
+Spaceship Gradle Plugins for Java projects
 =========================================
 
-* [Spaceship](http://www.scoppelletti.it/spaceship)
+This library is no longer being maintained: its features has been included in
+[Spaceship Gradle Plugins](http://github.com/dscoppelletti/spaceship-gradle).
